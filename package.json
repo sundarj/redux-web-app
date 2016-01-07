@@ -1,0 +1,23 @@
+{
+  "name": "redux-web-app",
+  "version": "1.0.0",
+  "description": "native web app using redux",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sundarj/redux-web-app.git"
+  },
+  "author": "sundarj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sundarj/redux-web-app/issues"
+  },
+  "homepage": "https://github.com/sundarj/redux-web-app#readme",
+  "dependencies": {
+    "ecstatic": "^1.4.0",
+    "routes": "^2.1.0"
+  }
+}
