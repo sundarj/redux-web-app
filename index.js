@@ -2,17 +2,23 @@
 
 const http = require('http')
 const fs = require('fs')
-const ecstatic = require('ecstatic')(__dirname + '/exports')
+const serve = require('serve-static')('exports')
 const router = require('routes')()
 
-const st = (src) => fs.createReadStream(__dirname + '/exports' + src)
+router.addRoute('/favicon.ico', (req, res) => {
+    res.setHeader('content-type', 'image/x-icon')
+    return res.end()
+})
 
-router.addRoute('/use/*', (req, res) => ecstatic(req, res))
-router.addRoute('/views/*', (req, res) => ecstatic(req, res))
+const final = (req, res) => {
+    return function() {
+        res.setHeader('content-type', 'text/html')
+        return fs.createReadStream(__dirname + '/exports/index.html').pipe(res)
+    }
+}
 
 router.addRoute('*', (req, res) => {
-    res.setHeader('content-type', 'text/html')
-    return st('/index.html').pipe(res)
+    return serve(req, res, final(req, res))
 })
 
 let server = http.createServer(
