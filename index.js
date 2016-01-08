@@ -4,11 +4,9 @@ const http = require('http')
 const fs = require('fs')
 const serve = require('serve-static')('exports')
 
-const final = (req, res) => {
-    return function() {
-        res.setHeader('content-type', 'text/html')
-        return fs.createReadStream(__dirname + '/exports/index.html').pipe(res)
-    }
+const final = (req, res) => () => {
+    res.setHeader('content-type', 'text/html')
+    return fs.createReadStream(__dirname + '/exports/index.html').pipe(res)
 }
 
 const favicon = (res) => {
